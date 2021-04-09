@@ -7,6 +7,11 @@ export const state = () => ({
 
 export type UserState = ReturnType<typeof state>
 
+type FormPayload = {
+  key: string
+  value: string
+}
+
 export const getters = getterTree(state, {
   getAge: (state) => state.age,
   getName: (state) => state.name,
@@ -15,8 +20,9 @@ export const mutations = mutationTree(state, {
   setAge(state, age: number): void {
     state.age = age
   },
-  setName(state, name: string): void {
-    state.name = name
+  setForm(state, payload: FormPayload): void {
+    // @ts-ignore
+    state[payload.key] = payload.value
   },
 })
 
@@ -25,10 +31,10 @@ export const actions = actionTree(
   {
     getOlder({ getters, commit }) {
       const currentAge = getters.getAge
-      commit('setAge', currentAge + 1)
+      commit('setAge', (currentAge as number) + 1)
     },
-    changeName({ commit }, name: string) {
-      commit('setName', name)
+    editForm({ commit }, payload) {
+      commit('setForm', payload)
     },
   }
 )

@@ -15,11 +15,7 @@
         </v-card-actions>
       </v-card>
       <div @click="getOlder">{{ age }}</div>
-      <input
-        type="text"
-        :value="name"
-        @change="changeName($event.target.value)"
-      />
+      <input type="text" :value="name" @change="editForm('name', $event)" />
       <div>{{ name }}</div>
     </v-col>
   </v-row>
@@ -40,7 +36,7 @@ export default Vue.extend({
   },
   created(): void {
     console.log(this.$isServer)
-    this.$accessor.user.getOlder()
+    // this.$accessor.user.getOlder()
     console.log(this.age)
     console.log(this.$accessor.user.age)
   },
@@ -48,8 +44,8 @@ export default Vue.extend({
     getOlder() {
       this.$accessor.user.getOlder()
     },
-    changeName(value: string) {
-      this.$accessor.user.changeName(value)
+    editForm(key: string, event: { target: HTMLInputElement }) {
+      this.$accessor.user.setForm({ key, value: event.target.value })
     },
   },
 })
