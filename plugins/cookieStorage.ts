@@ -1,8 +1,8 @@
-import { Context } from '@nuxt/types'
+import { Plugin } from '@nuxt/types'
 import createPersistedState from 'vuex-persistedstate'
 import * as Cookies from 'js-cookie'
 
-export default ({ store }: Context) => {
+const cookieStorate: Plugin = ({ store }) => {
   createPersistedState({
     paths: [''],
     storage: {
@@ -13,3 +13,5 @@ export default ({ store }: Context) => {
     },
   })(store)
 }
+
+export default cookieStorate

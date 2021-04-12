@@ -1,8 +1,10 @@
-import { Context } from '@nuxt/types'
+import { Plugin } from '@nuxt/types'
 import createPersistedState from 'vuex-persistedstate'
 
-export default ({ store }: Context) => {
+const localStorage: Plugin = ({ store }) => {
   createPersistedState({
-    paths: [''],
+    paths: ['user'],
   })(store)
 }
+
+export default localStorage
