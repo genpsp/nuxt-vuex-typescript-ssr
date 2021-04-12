@@ -16,6 +16,11 @@
       </v-card>
       <div @click="getOlder">{{ age }}</div>
       <input type="text" :value="name" @change="editForm('name', $event)" />
+      <input
+        type="checkbox"
+        :value="checked"
+        @change="editForm('checked', $event)"
+      />
       <div>{{ name }}</div>
     </v-col>
   </v-row>
@@ -33,12 +38,16 @@ export default Vue.extend({
     name() {
       return this.$accessor.user.name
     },
+    checked() {
+      return this.$accessor.user.checked
+    },
   },
   created(): void {
     console.log(this.$isServer)
     // this.$accessor.user.getOlder()
     console.log(this.age)
     console.log(this.$accessor.user.age)
+    this.$accessor.user.fetchSampleData()
   },
   methods: {
     getOlder() {

@@ -1,28 +1,30 @@
-import { Context } from '@nuxt/types'
+import { Plugin } from '@nuxt/types'
 import { NuxtAxiosInstance } from '@nuxtjs/axios'
-import { Inject } from '@nuxt/types/app'
 
 export class Api {
   axios: NuxtAxiosInstance
 
   constructor(axios: NuxtAxiosInstance) {
     this.axios = axios
+    axios.setBaseURL('https://jsonplaceholder.typicode.com/')
   }
 
-  async get(uri: string, params = {}) {
-    return await this.axios.$get(uri, { params })
+  async get(path: string, params = {}) {
+    return await this.axios.$get(path, { params })
   }
 
-  async post(uri: string, params = {}, config = {}) {
-    return await this.axios.$post(uri, params, config)
+  async post(path: string, params = {}, config = {}) {
+    return await this.axios.$post(path, params, config)
   }
 
-  async patch(uri: string, params = {}) {
-    return await this.axios.$patch(uri, params)
+  async patch(path: string, params = {}) {
+    return await this.axios.$patch(path, params)
   }
 }
 
-export default function ({ $axios }: Context, inject: Inject) {
+const api: Plugin = ({ $axios }, inject) => {
   const api = new Api($axios)
   inject('api', api)
 }
+
+export default api

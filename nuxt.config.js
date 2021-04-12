@@ -23,6 +23,8 @@ export default {
   plugins: [
     { src: '~/plugins/localStorage.ts', mode: 'client' },
     { src: '~/plugins/cookieStorage.ts', ssr: true },
+    { src: '~/plugins/api.ts' },
+    { src: '~/plugins/axios.ts' },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

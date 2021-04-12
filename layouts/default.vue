@@ -57,7 +57,7 @@ export default {
         {
           icon: 'mdi-apps',
           title: 'クーポン設定',
-          to: '/a',
+          to: '/inspire',
         },
         {
           icon: 'mdi-apps',
